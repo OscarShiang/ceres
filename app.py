@@ -8,13 +8,15 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, ImageMessage, StickerMessage
 )
 
+import os
+
 app = Flask(__name__)
 
 # channel access token
-linebot_api = LineBotApi('')
+linebot_api = LineBotApi(os.environ.get('LINE_CHANNEL_TOKEN', None))
 
 # channel secret
-handler = WebhookHandler('')
+handler = WebhookHandler(os.environ.get('LINE_CHANNEL_SECRET', None))
 
 # listen post request from '/callback'
 @app.route('/callback', methods = ['POST'])
